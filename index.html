@@ -797,6 +797,10 @@
             <option>到店评估</option>
           </select>
         </label>
+        <label>
+          到店时间
+          <input type="datetime-local" name="arrivalTime" data-default-arrival-time />
+        </label>
         <label class="full">
           备注
           <textarea name="message" placeholder="例如体重、毛结情况、是否怕吹风"></textarea>
@@ -810,5 +814,17 @@
     <span>© 2026 泡泡爪印宠物洗护店</span>
     <span>温柔洗护 · 透明流程 · 猫狗友好</span>
   </footer>
+  <script>
+    const defaultArrivalInput = document.querySelector("[data-default-arrival-time]");
+
+    if (defaultArrivalInput) {
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      tomorrow.setHours(9, 30, 0, 0);
+
+      const pad = (value) => String(value).padStart(2, "0");
+      defaultArrivalInput.value = `${tomorrow.getFullYear()}-${pad(tomorrow.getMonth() + 1)}-${pad(tomorrow.getDate())}T${pad(tomorrow.getHours())}:${pad(tomorrow.getMinutes())}`;
+    }
+  </script>
 </body>
 </html>

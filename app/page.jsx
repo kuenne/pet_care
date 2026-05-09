@@ -252,6 +252,16 @@ export default function Home() {
               <input type="text" name="name" placeholder="请输入姓名" />
             </label>
             <label>
+              到店时间
+              <select name="arrivalTime" defaultValue="今天 10:00 - 12:00">
+                <option>今天 10:00 - 12:00</option>
+                <option>今天 12:00 - 14:00</option>
+                <option>今天 14:00 - 16:00</option>
+                <option>今天 16:00 - 18:00</option>
+                <option>今天 18:00 - 20:00</option>
+              </select>
+            </label>
+            <label>
               联系电话
               <input type="tel" name="phone" placeholder="请输入手机号" />
             </label>

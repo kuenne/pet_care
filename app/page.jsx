@@ -1,3 +1,28 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
+const DEFAULT_ARRIVAL_HOUR = 9;
+const DEFAULT_ARRIVAL_MINUTE = 30;
+
+function formatDateTimeLocal(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+
+  return `${year}-${month}-${day}T${hours}:${minutes}`;
+}
+
+function getDefaultArrivalTime() {
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  tomorrow.setHours(DEFAULT_ARRIVAL_HOUR, DEFAULT_ARRIVAL_MINUTE, 0, 0);
+
+  return formatDateTimeLocal(tomorrow);
+}
+
 const services = [
   {
     icon: "洗",
@@ -68,6 +93,12 @@ const reviews = [
 ];
 
 export default function Home() {
+  const [arrivalTime, setArrivalTime] = useState("");
+
+  useEffect(() => {
+    setArrivalTime(getDefaultArrivalTime());
+  }, []);
+
   return (
     <>
       <header className="topbar">
@@ -272,6 +303,15 @@ export default function Home() {
                 <option>造型焕新</option>
                 <option>到店评估</option>
               </select>
+            </label>
+            <label>
+              到店时间
+              <input
+                type="datetime-local"
+                name="arrivalTime"
+                value={arrivalTime}
+                onChange={(event) => setArrivalTime(event.target.value)}
+              />
             </label>
             <label className="full">
               备注
